@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <title>เข้าสู่ระบบ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .card-float { animation: float 6s ease-in-out infinite; }
+
+    .input-glow:focus {
+      box-shadow: 0 0 0 2px rgba(99,102,241,.6);
+    }
+
+    .btn-cute {
+      background: linear-gradient(135deg,#6366f1,#a855f7);
+      transition: .2s;
+    }
+    .btn-cute:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(168,85,247,.4);
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    .shake { animation: shake .3s; }
+  </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-indigo-950">
+
+<div id="card" class="card-float bg-slate-900/60 backdrop-blur p-8 rounded-2xl w-[380px] text-white">
+  <div class="text-center text-4xl mb-2" id="mood">😴</div>
+  <h2 class="text-2xl font-bold text-center mb-2">Booky Worm</h2>
+  <p class="text-center text-slate-400 mb-6">เข้ามาได้เลยจั๊ฟฟฟ</p>
+
+  <form onsubmit="login(event)">
+    <input id="username" type="text" placeholder="ชื่อผู้ใช้"
+      class="input-glow w-full mb-4 p-3 rounded bg-slate-800 outline-none" required>
+
+    <input id="password" type="password" placeholder="รหัสผ่าน"
+      class="input-glow w-full mb-6 p-3 rounded bg-slate-800 outline-none" required>
+
+    <button class="btn-cute w-full p-3 rounded font-semibold">
+      เข้าสู่ระบบ →
+    </button>
+  </form>
+
+  <p class="text-center text-slate-400 mt-6">
+    ยังไม่มีบัญชี?
+    <a href="register.html" class="text-indigo-400 hover:underline">สมัครสมาชิก</a>
+  </p>
+</div>
+
+<!-- ====== 🔥 ใส่ Firebase ตรงนี้ ====== -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDkz30SBKOIQ2RKUsEJ445N8PHw4IU1RVg",
+      authDomain: "cute-login-9b9b3.firebaseapp.com",
+      projectId: "cute-login-9b9b3",
+      storageBucket: "cute-login-9b9b3.firebasestorage.app",
+      messagingSenderId: "471580829613",
+      appId: "1:471580829613:web:49ad70793d09a15a742324"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.fbLogin = function(email, pass) {
+      signInWithEmailAndPassword(auth, email, pass)
+        .then(() => location.href="home.html")
+        .catch(e => alert(e.message));
+    }
+  </script>
+</body>
+</html>
+
+<script src="js/script.js"></script>
+</body>
+</html>
