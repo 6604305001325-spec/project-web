@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-8">
+
+<h1 class="text-3xl font-bold mb-6">🔥 Admin : จัดการผู้ใช้</h1>
+
+<div class="bg-slate-900/70 rounded-xl p-6">
+  <table class="w-full text-left">
+    <thead>
+      <tr class="text-indigo-400">
+        <th class="py-2">ชื่อผู้ใช้</th>
+        <th>สิทธิ์</th>
+        <th>จัดการ</th>
+      </tr>
+    </thead>
+    <tbody id="userTable"></tbody>
+  </table>
+</div>
+
+<button onclick="logout()"
+  class="mt-6 bg-red-500 hover:bg-red-600 px-6 py-2 rounded">
+  ออกจากระบบ
+</button>
+
+<script src="js/script.js"></script>
+
+<script>
+  const current = JSON.parse(localStorage.getItem("currentUser"));
+  if (!current || current.role !== "admin") {
+    window.location.href = "index.html";
+  }
+
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const table = document.getElementById("userTable");
+
+  function render() {
+    table.innerHTML = "";
+    users.forEach((u, i) => {
+      table.innerHTML += `
+        <tr class="border-b border-slate-700">
+          <td class="py-2">${u.username}</td>
+          <td>${u.role}</td>
+          <td>
+            ${u.role !== "admin" ? 
+              `<button onclick="del(${i})"
+                class="text-red-400 hover:underline">ลบ</button>` 
+              : "-"}
+          </td>
+        </tr>
+      `;
+    });
+  }
+
+  function del(i) {
+    if (confirm("ลบผู้ใช้นี้?")) {
+      users.splice(i,1);
+      localStorage.setItem("users", JSON.stringify(users));
+      render();
+    }
+  }
+
+  render();
+</script>
+</body>
+</html>

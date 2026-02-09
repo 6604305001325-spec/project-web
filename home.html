@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<!-- ===== MENU ===== -->
+<header class="main-header">
+  <div class="header-content">
+    <h1 class="logo">Booky Worm</h1>
+    <p class="tagline">มุมแนะนำหนังสือ</p>
+
+    <!-- ช่องค้นหา -->
+    <div class="search-box">
+  <input 
+    type="text" 
+    id="searchInput"
+    placeholder="🔍 ค้นหาหนังสือ..."
+  >
+  </div>
+</header>
+
+
+<!-- ===== CONTENT ===== -->
+<section class="section" data-category="นิยาย">
+  <h2 class="section-title">หมวดนิยาย</h2>
+  <div class="grid" id="novel-list"></div>
+</section>
+
+<section class="section" data-category="การ์ตูน">
+  <h2 class="section-title">หมวดการ์ตูน</h2>
+  <div class="grid" id="comic-list"></div>
+</section>
+
+<section class="section" data-category="โปรแกรมมิ่ง">
+  <h2 class="section-title">หมวดโปรแกรมมิ่ง</h2>
+  <div class="grid" id="program-list"></div>
+</section>
+
+<section class="section" data-category="โปรแกรมมิ่ง">
+  <h2 class="section-title">หมวดพัฒนาตัวเอง</h2>
+  <div class="grid" id="yourself-list"></div>
+</section>
+
+<script>
+  if (!localStorage.getItem("currentUser")) {
+    window.location.href = "index.html";
+  }
+</script>
+
+<h1>ยินดีต้อนรับผู้ใช้</h1>
+<button onclick="logout()">ออกจากระบบ</button>
+
+<script src="JS/script.js"></script>
+
+<script src="js/app.js"></script>
+</body>
+</html>
